@@ -8,6 +8,6 @@ const app = express()
 app.use(bodyParser.json())
 routes(app);
 
-const port = process.env.DEV_PORT;
+const port = process.env.PORT;
 
 app.listen(port, () => console.log(`Running at ${port}`));
