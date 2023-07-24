@@ -39,6 +39,50 @@ class UserService {
             throw new Error('Error getting users');
         }
     }
+
+    async findById(id) {
+        const user = await db.Users.findOne({
+            where: {
+                id: id
+            }
+        });
+
+        if (!user)
+            throw new Error('User not found.');
+
+        return user;
+    }
+
+    async editUser(dto) {
+        const user = await this.findById(dto.id);
+
+        try {
+            user.name = dto.name;
+            user.email = dto.email;
+
+            await user.save();
+
+            return user;
+        } catch (error) {
+            console.error(error.stack || error);
+            throw new Error('Error editing user.');
+        }
+    }
+
+    async deleteUser(id) {
+        await this.findById(id);
+
+        try {
+            await db.Users.destroy({
+                where: {
+                    id: id
+                }
+            });
+        } catch (error) {
+            console.error(error.stack || error);
+            throw new Error('Error on deleting user.');
+        }
+    }
 }
 
 module.exports = UserService;
