@@ -9,8 +9,8 @@ router.use(authenticate)
 router
     .post('/users', UserController.register)
     .get('/users', UserController.getUsers)
-    .get('/users/id/:id', UserController.getUserById)
-    .put('/users/id/:id', UserController.editUser)
-    .delete('/users/id/:id', UserController.deleteUser);
+    .get('/users/:id', UserController.getUserById)
+    .put('/users/:id', UserController.editUser)
+    .delete('/users/:id', UserController.deleteUser);
 
 module.exports = router;
