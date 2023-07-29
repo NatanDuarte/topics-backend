@@ -25,7 +25,7 @@ class UserService {
             });
 
             return newUser;
-        } catch(error) {
+        } catch (error) {
             throw new Error(`Error on database register`);
         }
     }
