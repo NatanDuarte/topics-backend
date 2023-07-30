@@ -21,7 +21,6 @@ class RoleService {
 
             return newRole;
         } catch (error) {
-            console.error(error.stack || error);
             throw new Error('Error registering role');
         }
     }
@@ -32,7 +31,6 @@ class RoleService {
 
             return roles;
         } catch (error) {
-            console.error(error.stack || error);
             throw new Error('Error getting roles');
         }
     }
@@ -49,7 +47,6 @@ class RoleService {
 
             return role;
         } catch (error) {
-            console.error(error.stack || error);
             throw new Error('Error getting role');
         }
     }
@@ -65,13 +62,12 @@ class RoleService {
 
             return role;
         } catch (error) {
-            console.error(error.stack || error);
             throw new Error('Error editing role');
         }
     }
 
     async delete(id) {
-        const role = await this.getById(id);
+        await this.getById(id);
 
         try {
             await db.roles.destroy({
@@ -80,7 +76,6 @@ class RoleService {
                 }
             });
         } catch (error) {
-            console.error(error.stack || error);
             throw new Error('Error deleting role');
         }
     }
