@@ -7,7 +7,7 @@ class PermissionService {
     async register(dto) {
         const permission = await db.permissions.findOne({
             where: {
-                id: dto.id
+                name: dto.name
             }
         });
 
@@ -23,14 +23,13 @@ class PermissionService {
 
             return newPermission;
         } catch (error) {
-            console.error(error.stack || error);
             throw new Error('Error fetching permissions');
         }
     }
 
     async getAll() {
         try {
-            const permissions = await bd.permissions.findAll();
+            const permissions = await db.permissions.findAll();
 
             return permissions;
         } catch (error) {
@@ -70,7 +69,7 @@ class PermissionService {
     }
 
     async delete(id) {
-        await this.findById(dto.id);
+        await this.findById(id);
 
         try {
             await db.permissions.destroy({

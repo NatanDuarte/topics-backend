@@ -43,7 +43,7 @@ class RoleController {
         const { name, description } = req.body;
 
         try {
-            const role = await roleService.edit({ id, name, description });
+            const role = await roleService.update({ id, name, description });
 
             res.status(200).json(role);
         } catch (error) {

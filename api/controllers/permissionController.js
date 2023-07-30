@@ -13,7 +13,7 @@ class PermissionController {
                 description
             });
 
-            res.send(201).json(permission);
+            res.status(201).json(permission);
         } catch (error) {
             console.error(error.stack || error);
             res.status(401).send({ message: error.message });
@@ -22,9 +22,9 @@ class PermissionController {
 
     static async getAll(_, res) {
         try {
-            const permissions = await permissionService.findAll();
+            const permissions = await permissionService.getAll();
 
-            res.send(201).json(permissions);
+            res.status(200).send(permissions);
         } catch (error) {
             console.error(error.stack || error);
             res.status(401).send({ message: error.message });
@@ -32,12 +32,12 @@ class PermissionController {
     }
 
     static async getById(req, res) {
-        const id = req.params;
+        const { id } = req.params;
 
         try {
             const permission = await permissionService.findById(id);
 
-            res.send(201).json(permission);
+            res.status(200).json(permission);
         } catch (error) {
             console.error(error.stack || error);
             res.status(401).send({ message: error.message });
@@ -45,7 +45,7 @@ class PermissionController {
     }
 
     static async update(req, res) {
-        const id = req.params;
+        const { id } = req.params;
         const { name, description } = req.body;
 
         try {
@@ -53,7 +53,7 @@ class PermissionController {
                 id, name, description
             });
 
-            res.send(201).json(permission);
+            res.status(200).json(permission);
         } catch (error) {
             console.error(error.stack || error);
             res.status(401).send({ message: error.message });
@@ -61,12 +61,12 @@ class PermissionController {
     }
 
     static async delete(req, res) {
-        const id = req.params;
+        const { id } = req.params;
 
         try {
             await permissionService.delete(id);
 
-            res.send(201).send({ message: 'permission deleted successfully' });
+            res.status(200).send({ message: 'permission deleted successfully' });
         } catch (error) {
             console.error(error.stack || error);
             res.status(401).send({ message: error.message });

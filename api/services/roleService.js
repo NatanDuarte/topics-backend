@@ -1,4 +1,6 @@
 const db = require('../models');
+
+
 const uuid = require('uuid');
 
 class RoleService {
@@ -10,7 +12,7 @@ class RoleService {
         });
 
         if (role)
-            throw new Error(`A role with the name ${dto.name} already exists`)
+            throw new Error(`A role with the name "${dto.name}" already exists`)
 
         try {
             const newRole = await db.roles.create({
