@@ -94,16 +94,16 @@ class SecurityService {
             }
         });
 
-        await role.permissions.removeRole_permissions(role.role_permissions);
+        await role.removeRole_permissions(role.role_permissions);
 
-        await role.permissions.addRole_permissions(registeredPermissions);
+        await role.addRole_permissions(registeredPermissions);
 
         const newRole = await db.roles.findOne({
             include: [
                 {
                     model: db.permissions,
-                    as: 'roles_permissions',
-                    attributes: ['id', 'nome', 'description']
+                    as: 'role_permissions',
+                    attributes: ['id', 'name', 'description']
                 }
             ],
             where: {
