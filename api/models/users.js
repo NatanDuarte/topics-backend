@@ -21,6 +21,12 @@ module.exports = (sequelize, DataTypes) => {
         as: 'users_permission',
         foreignKey: 'user_id'
       });
+
+      Users.belongsToMany(models.Post, {
+        through: models.user_posts,
+        as: 'users_posts',
+        foreignKey: 'user_id'
+      });
     }
   }
   Users.init({
