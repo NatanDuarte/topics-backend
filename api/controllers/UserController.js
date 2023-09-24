@@ -13,7 +13,13 @@ class UserController {
         try {
             const user = await userService.register({ name, email, password });
 
-            res.status(201).json(user);
+            const userDto = {
+                id: user.id,
+                name: user.name,
+                email: user.email
+            }
+
+            res.status(201).json(userDto);
         } catch (error) {
             console.error(error.stack || error);
             res.status(400).send({ message: error.message });
